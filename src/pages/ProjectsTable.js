@@ -12,6 +12,9 @@ const ProjectsTable = () => {
         const response = await fetch(
           "https://raw.githubusercontent.com/saaslabsco/frontend-assignment/refs/heads/master/frontend-assignment.json"
         );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
         // Filter highly-rated projects
         const filteredProjects = data.filter(
@@ -25,6 +28,7 @@ const ProjectsTable = () => {
         console.error("Error fetching data:", error);
       }
     };
+
     fetchProjects();
   }, []);
 
